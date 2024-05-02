@@ -17,6 +17,7 @@ List<dynamic> mainDataCollection = [
 ];
 
 void main() async {
+  mainDataCollection = await readFile("/lib/data/data.json");
   mainDataCollection.add(DATAFORMAT(habbitName: "habbit2").dataFormat());
   writeData("lib/data/data.json", mainDataCollection);
 }
