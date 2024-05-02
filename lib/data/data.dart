@@ -1,6 +1,8 @@
+import 'package:habbit_tracker_flutter/data/read_file.dart';
+import 'package:habbit_tracker_flutter/data/write_data.dart';
 import 'package:intl/intl.dart';
 
-List<Map<String, List<Map<String, dynamic>>>> data = [
+List<dynamic> mainDataCollection = [
   {
     "Hello": [
       {"date": "27 Apr", "done": true},
@@ -14,16 +16,19 @@ List<Map<String, List<Map<String, dynamic>>>> data = [
   },
 ];
 
-class DATA {
-  String habbitName;
-  late List<Map<String, dynamic>> dateData;
+void main() async {
+  mainDataCollection.add(DATAFORMAT(habbitName: "habbit2").dataFormat());
+  writeData("lib/data/data.json", mainDataCollection);
+}
 
-  DATA(this.habbitName) {
-    dateGiver();
-  }
+class DATAFORMAT {
+  final String habbitName;
+  final List dateData = [];
+
+  DATAFORMAT({required this.habbitName});
 
   void dateGiver() {
-    Map<String, dynamic> individualdateData = {};
+    Map individualdateData = {};
     for (int i = 0; i < 7; i++) {
       DateTime date = DateTime.now().add(Duration(days: i));
       DateFormat formatter = DateFormat('d MMM');
@@ -32,5 +37,10 @@ class DATA {
 
       dateData.add(individualdateData);
     }
+  }
+
+  Map dataFormat() {
+    dateGiver();
+    return {habbitName: dateData};
   }
 }
