@@ -18,20 +18,19 @@ class _SpecialCheckboxState extends State<SpecialCheckbox> {
     return Consumer<PDS>(builder: (context, pds, _) {
       return SafeArea(
         child: ListView.builder(
-            itemCount: 7,
+            itemCount: constants.length,
             itemBuilder: (context, index) {
               // final Map<String, dynamic> dateData =
               //     constants[0]['data'][index];
-              print(constants);
               return GestureDetector(
                 onTap: () {
-                  pds.addNewData("hi");
+                  pds.addNewData("ok");
                 },
                 child: Container(
                   width: 20,
                   height: 20,
                   color: Colors.yellow,
-                  child: Text(constants[0]['data'][index]['date']),
+                  child: Text(constants[index]["habbitName"]),
                 ),
               );
             }),
