@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:habbit_tracker_flutter/providers/providers.dart';
+import 'package:habbit_tracker_flutter/constants.dart';
+import 'package:habbit_tracker_flutter/providers/main_provider.dart';
+import 'package:habbit_tracker_flutter/providers/special_checkbox_provider.dart';
 import 'package:habbit_tracker_flutter/widgets/special_checkbox.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => PDS(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: ((context) => MainPVDS())),
+        ChangeNotifierProvider(create: ((context) => SpecialCheckBoxPVD()))
+      ],
       child: const MyApp(),
     ),
   );
@@ -22,10 +27,15 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: SpecialCheckbox(),
-      ),
+    return Consumer<MainPVDS>(
+      builder: (context, mainPVDS, _) {
+        return MaterialApp(
+          home: Scaffold(
+            body: SpecialCheckbox(
+                done: constants[0]["data"][0]["done"], date: "13 May"),
+          ),
+        );
+      },
     );
   }
 }

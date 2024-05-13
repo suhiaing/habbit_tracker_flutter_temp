@@ -1,10 +1,13 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:habbit_tracker_flutter/constants.dart';
-import 'package:habbit_tracker_flutter/providers/providers.dart';
+import 'package:habbit_tracker_flutter/providers/special_checkbox_provider.dart';
 import 'package:provider/provider.dart';
 
 class SpecialCheckbox extends StatefulWidget {
-  const SpecialCheckbox({super.key});
+  bool done;
+  String date;
+  SpecialCheckbox({required this.done, required this.date, super.key});
 
   @override
   State<SpecialCheckbox> createState() => _SpecialCheckboxState();
@@ -13,28 +16,17 @@ class SpecialCheckbox extends StatefulWidget {
 class _SpecialCheckboxState extends State<SpecialCheckbox> {
   @override
   Widget build(BuildContext context) {
-    PDS pds = Provider.of<PDS>(context);
-
-    return Consumer<PDS>(builder: (context, pds, _) {
-      return SafeArea(
-        child: ListView.builder(
-            itemCount: constants.length,
-            itemBuilder: (context, index) {
-              // final Map<String, dynamic> dateData =
-              //     constants[0]['data'][index];
-              return GestureDetector(
-                onTap: () {
-                  pds.addNewData("ok");
-                },
-                child: Container(
-                  width: 20,
-                  height: 20,
-                  color: Colors.yellow,
-                  child: Text(constants[index]["habbitName"]),
-                ),
-              );
-            }),
-      );
+    return Consumer<SpecialCheckBoxPVD>(
+        builder: (context, specialCheckBoxPVD, _) {
+      return GestureDetector(
+          onTap: () {
+            specialCheckBoxPVD.onChangedSCP(widget.done, widget.date);
+          },
+          child: Container(
+            width: 40,
+            height: 40,
+            color: widget.done == true ? Colors.green : Colors.red,
+          ));
     });
   }
 }
