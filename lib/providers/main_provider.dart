@@ -3,6 +3,7 @@ import 'package:habbit_tracker_flutter/constants.dart';
 import 'package:habbit_tracker_flutter/data/data_format.dart';
 import 'package:habbit_tracker_flutter/data/read_file.dart';
 import 'package:habbit_tracker_flutter/data/write_data.dart';
+import 'package:intl/intl.dart';
 
 class MainPVDS extends ChangeNotifier {
   MainPVDS() {
@@ -38,5 +39,21 @@ class MainPVDS extends ChangeNotifier {
 
   void nl() {
     notifyListeners();
+  }
+
+  String todayDate() {
+    DateTime date = DateTime.now();
+    DateFormat formatter = DateFormat('d MMM');
+    String formattedDate = formatter.format(date);
+    return formattedDate;
+  }
+
+  void onChangedSCP(bool val, String currentDate) {
+    String today = todayDate();
+    nl();
+    if (today == currentDate) {
+      val = !val;
+      nl();
+    }
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:habbit_tracker_flutter/constants.dart';
-import 'package:habbit_tracker_flutter/providers/main_provider.dart';
 import 'package:intl/intl.dart';
 
 class SpecialCheckBoxPVD extends ChangeNotifier {
+  List scbConstants = constants;
   void nl() {
     notifyListeners();
   }
@@ -19,9 +19,8 @@ class SpecialCheckBoxPVD extends ChangeNotifier {
     debugPrint(constants.toString());
     String today = todayDate();
     if (today == currentDate) {
-      constants[0]["data"][0]["done"] = !constants[0]["data"][0]["done"];
-      nl();
-      print(constants[0]["data"][0]["done"]);
+    } else {
+      print("Just care about today");
     }
   }
 }

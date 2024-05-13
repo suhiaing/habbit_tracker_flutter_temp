@@ -31,8 +31,11 @@ class _MyAppState extends State<MyApp> {
       builder: (context, mainPVDS, _) {
         return MaterialApp(
           home: Scaffold(
-            body: SpecialCheckbox(
-                done: constants[0]["data"][0]["done"], date: "13 May"),
+            body: GestureDetector(
+              onTap: () {},
+              child: SpecialCheckbox(
+                  done: constants[0]["data"][0]["done"], date: "13 May"),
+            ),
           ),
         );
       },

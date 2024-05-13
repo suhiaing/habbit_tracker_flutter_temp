@@ -19,14 +19,27 @@ class _SpecialCheckboxState extends State<SpecialCheckbox> {
     return Consumer<SpecialCheckBoxPVD>(
         builder: (context, specialCheckBoxPVD, _) {
       return GestureDetector(
-          onTap: () {
-            specialCheckBoxPVD.onChangedSCP(widget.done, widget.date);
-          },
-          child: Container(
-            width: 40,
-            height: 40,
-            color: widget.done == true ? Colors.green : Colors.red,
-          ));
+        onTap: () {
+          setState(() {
+            String today = specialCheckBoxPVD.todayDate();
+            if (today == widget.date) {
+              widget.done = !widget.done;
+            }
+          });
+        },
+        child: Container(
+          width: 40,
+          height: 40,
+          color: Colors.blueGrey.shade50,
+          child: widget.done == true
+              ? const Icon(
+                  Icons.check,
+                  color: Colors.green,
+                  size: 40,
+                )
+              : const Icon(Icons.clear, color: Colors.red, size: 40),
+        ),
+      );
     });
   }
 }
