@@ -7,7 +7,14 @@ import 'package:provider/provider.dart';
 class SpecialCheckbox extends StatefulWidget {
   bool done;
   String date;
-  SpecialCheckbox({required this.done, required this.date, super.key});
+  int indexOfConstant;
+  int indexOfData;
+  SpecialCheckbox(
+      {required this.done,
+      required this.date,
+      required this.indexOfConstant,
+      required this.indexOfData,
+      super.key});
 
   @override
   State<SpecialCheckbox> createState() => _SpecialCheckboxState();
@@ -26,6 +33,8 @@ class _SpecialCheckboxState extends State<SpecialCheckbox> {
               widget.done = !widget.done;
             }
           });
+          specialCheckBoxPVD.onChangedSCP(
+              widget.date, widget.indexOfConstant, widget.indexOfData);
         },
         child: Container(
           width: 40,

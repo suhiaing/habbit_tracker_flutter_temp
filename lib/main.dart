@@ -34,7 +34,11 @@ class _MyAppState extends State<MyApp> {
             body: GestureDetector(
               onTap: () {},
               child: SpecialCheckbox(
-                  done: constants[0]["data"][0]["done"], date: "13 May"),
+                done: constants[0]["data"][0]["done"],
+                date: "14 May",
+                indexOfConstant: 0,
+                indexOfData: 0,
+              ),
             ),
           ),
         );
