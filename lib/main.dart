@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:habbit_tracker_flutter/constants.dart';
+import 'package:habbit_tracker_flutter/pages/particular_data_table.dart';
 import 'package:habbit_tracker_flutter/providers/main_provider.dart';
 import 'package:habbit_tracker_flutter/providers/special_checkbox_provider.dart';
-import 'package:habbit_tracker_flutter/widgets/special_checkbox.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -17,32 +17,24 @@ void main() {
   );
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
   Widget build(BuildContext context) {
-    return Consumer<MainPVDS>(
-      builder: (context, mainPVDS, _) {
-        return MaterialApp(
-          home: Scaffold(
-            body: GestureDetector(
-              onTap: () {},
-              child: SpecialCheckbox(
-                done: constants[0]["data"][0]["done"],
-                date: "14 May",
-                indexOfConstant: 0,
-                indexOfData: 0,
-              ),
-            ),
-          ),
-        );
-      },
+    return MaterialApp(
+      theme: ThemeData(
+          scaffoldBackgroundColor: const Color.fromRGBO(244, 237, 202, 1)),
+      home: Scaffold(
+        body: Consumer<MainPVDS>(
+          builder: (context, mainPVDS, _) {
+            List<dynamic> firstDate = constants[0]["data"];
+            int lengthOfDate = (firstDate.length) + 1;
+            return ParticularDataTable(
+                lengthOfDate: lengthOfDate, firstDate: firstDate);
+          },
+        ),
+      ),
     );
   }
 }

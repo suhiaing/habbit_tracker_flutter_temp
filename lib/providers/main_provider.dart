@@ -7,7 +7,6 @@ import 'package:habbit_tracker_flutter/data/write_data.dart';
 class MainPVDS extends ChangeNotifier {
   MainPVDS() {
     gettingDataFromJSONfile();
-    debugPrint("called mainpvds");
   }
 
   void gettingDataFromJSONfile() async {

@@ -1,5 +1,3 @@
-import 'package:habbit_tracker_flutter/constants.dart';
-import 'package:habbit_tracker_flutter/data/write_data.dart';
 import 'package:intl/intl.dart';
 
 class DATAFORMAT {
@@ -14,7 +12,7 @@ class DATAFORMAT {
       DateTime date = DateTime.now().add(Duration(days: i));
       DateFormat formatter = DateFormat('d MMM');
       String formattedDate = formatter.format(date);
-      individualdateData = {"date": formattedDate, "done": true};
+      individualdateData = {"date": formattedDate, "done": false};
 
       dateData.add(individualdateData);
     }
@@ -26,7 +24,5 @@ class DATAFORMAT {
   }
 }
 
-void main() {
-  constants.add(DATAFORMAT(habbitname: "Hello").dataFormat());
-  writeData("data.json", constants);
-}
+  //constants.add(DATAFORMAT(habbitname: "Hello").dataFormat());
+

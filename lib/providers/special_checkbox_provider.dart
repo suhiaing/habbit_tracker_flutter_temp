@@ -24,6 +24,14 @@ class SpecialCheckBoxPVD extends MainPVDS {
       debugPrint("Just care about today");
     }
   }
+
+  void showMySnackbar(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Just care about today!'),
+      ),
+    );
+  }
 }
 
 // class _MyAppState extends State<MyApp> {

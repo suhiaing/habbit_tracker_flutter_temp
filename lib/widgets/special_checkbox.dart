@@ -36,10 +36,9 @@ class _SpecialCheckboxState extends State<SpecialCheckbox> {
           specialCheckBoxPVD.onChangedSCP(
               widget.date, widget.indexOfConstant, widget.indexOfData);
         },
-        child: Container(
+        child: SizedBox(
           width: 40,
           height: 40,
-          color: Colors.blueGrey.shade50,
           child: widget.done == true
               ? const Icon(
                   Icons.check,
