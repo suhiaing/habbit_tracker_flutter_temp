@@ -1,6 +1,8 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:habbit_tracker_flutter/constants.dart';
+import 'package:habbit_tracker_flutter/data/write_data.dart';
 import 'package:habbit_tracker_flutter/providers/special_checkbox_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -51,5 +53,11 @@ class _SpecialCheckboxState extends State<SpecialCheckbox> {
         ),
       );
     });
+  }
+
+  @override
+  void dispose() {
+    writeData("data.json", constants);
+    super.dispose();
   }
 }

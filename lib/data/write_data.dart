@@ -11,6 +11,7 @@ Future<void> writeData(String filePath, List<dynamic> content) async {
     }
     final jsonString = jsonEncode(content);
     await file.writeAsString(jsonString);
+    print("success");
   } on FileSystemException catch (e) {
     return Future.error('Error reading file: $e');
   }

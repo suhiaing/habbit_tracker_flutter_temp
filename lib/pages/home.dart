@@ -30,7 +30,6 @@ class _HomeState extends State<Home> {
           }
 
           constants = snapshot.data!;
-
           List<dynamic> firstDate = constants[0]["data"];
           int lengthOfDate = (firstDate.length) + 1;
           return ParticularDataTable(

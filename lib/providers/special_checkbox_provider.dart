@@ -19,7 +19,6 @@ class SpecialCheckBoxPVD extends MainPVDS {
       constants[indexOfConstants]["data"][indexOfData]["done"] =
           !constants[indexOfConstants]["data"][indexOfData]["done"];
       nl();
-      refreshData(constants);
     }
   }
 
