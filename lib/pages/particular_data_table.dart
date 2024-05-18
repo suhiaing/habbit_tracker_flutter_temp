@@ -5,11 +5,11 @@ import 'package:habbit_tracker_flutter/widgets/special_checkbox.dart';
 class ParticularDataTable extends StatelessWidget {
   const ParticularDataTable({
     super.key,
-    required this.lengthOfDate,
+    required this.habbitCount,
     required this.firstDate,
   });
 
-  final int lengthOfDate;
+  final int habbitCount;
   final List firstDate;
 
   @override
@@ -25,7 +25,7 @@ class ParticularDataTable extends StatelessWidget {
               headingRowHeight: 90,
               dataRowMaxHeight: 70,
               columns: List.generate(
-                lengthOfDate,
+                habbitCount,
                 (index) {
                   int currentIndexMinusOne = index - 1;
                   String currentDate = '';
