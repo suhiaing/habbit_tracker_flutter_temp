@@ -23,14 +23,18 @@ class _HomeState extends State<Home> {
     return FutureBuilder(
         future: constantF,
         builder: (context, snapshot) {
-          print("snapshot: \n ${snapshot.data}");
-          //constants = snapshot.data!;
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
 
-          // List<dynamic> firstDate = constants[0]["data"];
-          // int lengthOfDate = (firstDate.length) + 1;
-          // return ParticularDataTable(
-          //     lengthOfDate: lengthOfDate, firstDate: firstDate);
-          return const Placeholder();
+          constants = snapshot.data!;
+
+          List<dynamic> firstDate = constants[0]["data"];
+          int lengthOfDate = (firstDate.length) + 1;
+          return ParticularDataTable(
+              lengthOfDate: lengthOfDate, firstDate: firstDate);
         });
   }
 }
