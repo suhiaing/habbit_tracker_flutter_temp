@@ -31,6 +31,8 @@ class _SpecialCheckboxState extends State<SpecialCheckbox> {
             String today = specialCheckBoxPVD.todayDate();
             if (today == widget.date) {
               widget.done = !widget.done;
+            } else {
+              specialCheckBoxPVD.showSnackbar(context);
             }
           });
           specialCheckBoxPVD.onChangedSCP(
