@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:habbit_tracker_flutter/constants.dart';
 import 'package:habbit_tracker_flutter/data/read_file.dart';
-import 'package:habbit_tracker_flutter/pages/particular_data_table.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -35,9 +33,9 @@ class _HomeState extends State<Home> {
   int itemCountByConstraints(BoxConstraints constraints) {
     if (constraints.maxWidth < 700) {
       return 1;
-    } else if (constraints.maxWidth < 1000) {
+    } else if (constraints.maxWidth < 1100) {
       return 2;
-    } else if (constraints.maxWidth < 1300) {
+    } else if (constraints.maxWidth < 1450) {
       return 3;
     }
     return 4;
@@ -74,15 +72,6 @@ class _HomeState extends State<Home> {
                       double successRate = plans["success_rate"];
 
                       return GestureDetector(
-                        //  onTap: () {
-                        //     Navigator.of(context).push(
-                        //       MaterialPageRoute(
-                        //         builder: (context) {
-                        //           return ParticularDataTable(habbitCount: 5, firstDate: firstDate);
-                        //         },
-                        //       ),
-                        //     );
-                        //   },
                         child: Card(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,15 +80,21 @@ class _HomeState extends State<Home> {
                                 child: Container(
                                   width: double.infinity,
                                   decoration: BoxDecoration(
-                                      color: successRateColor(successRate),
                                       borderRadius:
                                           BorderRadiusDirectional.circular(30)),
                                   child: Center(
-                                    child: Text(
-                                      "${successRate.toString()}%",
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 50,
+                                    child: CircularPercentIndicator(
+                                      radius: 85,
+                                      lineWidth: 15,
+                                      percent: (successRate / 100),
+                                      progressColor:
+                                          successRateColor(successRate),
+                                      backgroundColor:
+                                          successRateColor(successRate)
+                                              .withOpacity(0.1),
+                                      center: Text(
+                                        "${successRate.toString()}%",
+                                        style: const TextStyle(fontSize: 30),
                                       ),
                                     ),
                                   ),
@@ -111,11 +106,11 @@ class _HomeState extends State<Home> {
                               Text(
                                 title,
                                 style: const TextStyle(
-                                  fontSize: 28,
+                                  fontSize: 20,
                                 ),
                               ),
                               const SizedBox(
-                                height: 20,
+                                height: 15,
                               ),
                               Text(
                                 duration,
@@ -147,3 +142,12 @@ class _HomeState extends State<Home> {
 
 
           
+                        //  onTap: () {
+                        //     Navigator.of(context).push(
+                        //       MaterialPageRoute(
+                        //         builder: (context) {
+                        //           return ParticularDataTable(habbitCount: 5, firstDate: firstDate);
+                        //         },
+                        //       ),
+                        //     );
+                        //   },
