@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:habbit_tracker_flutter/pages/home.dart';
-
 import 'package:habbit_tracker_flutter/providers/special_checkbox_provider.dart';
 import 'package:provider/provider.dart';
 

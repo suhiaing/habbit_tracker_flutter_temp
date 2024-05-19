@@ -10,7 +10,7 @@ class MainPVDS extends ChangeNotifier {
   }
 
   void refreshData(List<dynamic> constants) {
-    writeData('data.json', constants);
+    writeData(constants);
   }
 
   void removeData(Map data) {

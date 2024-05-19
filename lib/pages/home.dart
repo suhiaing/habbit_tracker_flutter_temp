@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:habbit_tracker_flutter/constants.dart';
 import 'package:habbit_tracker_flutter/data/read_file.dart';
+import 'package:habbit_tracker_flutter/widgets/up_bar_home_page.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class Home extends StatefulWidget {
@@ -15,23 +17,23 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    constantF = readFile("data2.json");
+    constantF = readFile();
   }
 
   Color successRateColor(double successRate) {
     if (successRate >= 70) {
       return Colors.green;
     } else if (successRate >= 40) {
-      return Colors.orange.shade600;
+      return Colors.orange.shade700;
     } else if (successRate >= 0) {
-      return Colors.red;
+      return Colors.red.shade700;
     }
 
     return Colors.black;
   }
 
   int itemCountByConstraints(BoxConstraints constraints) {
-    if (constraints.maxWidth < 700) {
+    if (constraints.maxWidth < 750) {
       return 1;
     } else if (constraints.maxWidth < 1100) {
       return 2;
@@ -56,34 +58,54 @@ class _HomeState extends State<Home> {
           return LayoutBuilder(
             builder: ((context, constraints) {
               return Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: GridView.builder(
-                    itemCount: constants.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: itemCountByConstraints(constraints),
-                      mainAxisSpacing: 20.0,
-                      crossAxisSpacing: 70,
-                      childAspectRatio: constraints.maxWidth > 700 ? 1 : 2,
+                padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const UpBarHomePage(),
+                    const SizedBox(
+                      height: 40,
                     ),
-                    itemBuilder: (context, index) {
-                      Map plans = constants[index];
-                      String title = plans["title"];
-                      String duration = plans["duration"];
-                      double successRate = plans["success_rate"];
+                    Expanded(
+                      child: GridView.builder(
+                          itemCount: constants.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: itemCountByConstraints(constraints),
+                            mainAxisSpacing: 50.0,
+                            crossAxisSpacing: 70,
+                            childAspectRatio:
+                                constraints.maxWidth < 750 ? 2 : 1.2,
+                          ),
+                          itemBuilder: (context, index) {
+                            Map plans = constants[index];
+                            String title = plans["title"];
+                            String duration = plans["duration"];
+                            double successRate = plans["success_rate"];
 
-                      return GestureDetector(
-                        child: Card(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadiusDirectional.circular(30)),
-                                  child: Center(
-                                    child: CircularPercentIndicator(
+                            return GestureDetector(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        offset: Offset(4, 4),
+                                        blurRadius: 15,
+                                        spreadRadius: 5,
+                                      ),
+                                      BoxShadow(
+                                        color: Colors.white70,
+                                        offset: Offset(-4, -4),
+                                        blurRadius: 15,
+                                        spreadRadius: 5,
+                                      )
+                                    ]),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    CircularPercentIndicator(
                                       radius: 85,
                                       lineWidth: 15,
                                       percent: (successRate / 100),
@@ -91,41 +113,34 @@ class _HomeState extends State<Home> {
                                           successRateColor(successRate),
                                       backgroundColor:
                                           successRateColor(successRate)
-                                              .withOpacity(0.1),
+                                              .withOpacity(0.25),
                                       center: Text(
                                         "${successRate.toString()}%",
-                                        style: const TextStyle(fontSize: 30),
+                                        style: const TextStyle(fontSize: 28),
+                                      ),
+                                      circularStrokeCap:
+                                          CircularStrokeCap.round,
+                                    ),
+                                    Text(
+                                      title,
+                                      style: const TextStyle(
+                                        fontSize: 23,
                                       ),
                                     ),
-                                  ),
+                                    Text(
+                                      duration,
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.blueGrey.shade200),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                title,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              Text(
-                                duration,
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.blueGrey.shade200),
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              )
-                            ],
-                          ),
-                        ),
-                      );
-                    }),
+                            );
+                          }),
+                    ),
+                  ],
+                ),
               );
             }),
           );
