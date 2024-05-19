@@ -19,8 +19,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
+    return MaterialApp(
+      theme: ThemeData(
+        fontFamily: "NotoSans",
+      ),
+      home: const Scaffold(
         body: Home(),
       ),
     );

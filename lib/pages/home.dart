@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:habbit_tracker_flutter/constants.dart';
 import 'package:habbit_tracker_flutter/data/read_file.dart';
 import 'package:habbit_tracker_flutter/widgets/up_bar_home_page.dart';
@@ -64,7 +63,7 @@ class _HomeState extends State<Home> {
                   children: [
                     const UpBarHomePage(),
                     const SizedBox(
-                      height: 40,
+                      height: 30,
                     ),
                     Expanded(
                       child: GridView.builder(
@@ -131,7 +130,7 @@ class _HomeState extends State<Home> {
                                       duration,
                                       style: TextStyle(
                                           fontSize: 18,
-                                          color: Colors.blueGrey.shade200),
+                                          color: Colors.blueGrey.shade300),
                                     ),
                                   ],
                                 ),
