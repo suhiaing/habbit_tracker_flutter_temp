@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:habbit_tracker_flutter/constants.dart';
 import 'package:habbit_tracker_flutter/data/read_file.dart';
+import 'package:habbit_tracker_flutter/providers/home_provider/title_provider_home.dart';
 import 'package:habbit_tracker_flutter/widgets/up_bar_home_page.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -120,12 +123,20 @@ class _HomeState extends State<Home> {
                                       circularStrokeCap:
                                           CircularStrokeCap.round,
                                     ),
-                                    Text(
-                                      title,
-                                      style: const TextStyle(
-                                        fontSize: 23,
-                                      ),
-                                    ),
+                                    Consumer<TitleHomePVD>(
+                                        builder: ((context, titleHomePVD, _) {
+                                      return GestureDetector(
+                                        onDoubleTap: () {
+                                          print("changeTitle");
+                                        },
+                                        child: Text(
+                                          title,
+                                          style: const TextStyle(
+                                            fontSize: 23,
+                                          ),
+                                        ),
+                                      );
+                                    })),
                                     Text(
                                       duration,
                                       style: TextStyle(
